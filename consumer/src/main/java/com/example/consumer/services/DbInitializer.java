@@ -20,17 +20,19 @@ public class DbInitializer implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         createDb();
-
     }
 
     private void createDb() {
+        System.out.println("We are initializing heeeeeeeeeeeeeeeeeeeeeer");
         Connection connection = connectionFactory.getConnection();
         List<String> dbList = r.dbList().run(connection);
         if (!dbList.contains("new_database")) {
+            System.out.println("Creating DATABASE Heeeeeeeeeeeeeeeeeeeeeeeeeere");
             r.dbCreate("new_database").run(connection);
         }
         List<String> tables = r.db("new_database").tableList().run(connection);
         if (!tables.contains("new_table")) {
+            System.out.println("Creating Table Heeeeeeeeeeeeeeeeeeeeeeeeeere");
             r.db("new_database").tableCreate("new_table").run(connection);
             r.db("new_database").table("new_table").indexCreate("trap").run(connection);
         }
