@@ -15,10 +15,10 @@ import java.util.Map;
 @RequestMapping("/api/rethink")
 public class RethinkController {
     @Autowired
-        private RethinkDBService rethinkDBService;
+    private RethinkDBService rethinkDBService;
 
 
-    @PostMapping("/data")
+        @PostMapping("/data")
         public ResponseEntity<String> saveData(@RequestBody Map<String, Object> data) {
             rethinkDBService.saveData("my_database", "my_table", data);
             return ResponseEntity.ok("Data saved successfully in RethinkDB");
@@ -27,6 +27,7 @@ public class RethinkController {
         @GetMapping("/data")
         public ResponseEntity<List<Map<String, Object>>> getData() {
             List<Map<String, Object>> result = rethinkDBService.getData("my_database", "my_table");
+            System.out.println(result);
             if (result != null) {
                 return ResponseEntity.ok(result);
             } else {

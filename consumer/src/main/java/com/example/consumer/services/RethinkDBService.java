@@ -1,10 +1,12 @@
 package com.example.consumer.services;
 
+import com.example.consumer.configuration.SocketTextHandler;
 import com.example.consumer.factory.RethinkDBConnectionFactory;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rethinkdb.RethinkDB;
 import com.rethinkdb.gen.ast.Json;
+import com.rethinkdb.gen.ast.Table;
 import com.rethinkdb.net.Cursor;
 import org.reactivestreams.Subscription;
 import org.slf4j.Logger;
@@ -42,6 +44,7 @@ public class RethinkDBService {
             String jsonString = "{\"trap\":\" "+message+"\"}";
             JsonNode jsonNode = objectMapper.readTree(jsonString);
             // Create a RethinkDB document object using the parsed JSON object
+
             Map<String, Object> document = objectMapper.convertValue(jsonNode, Map.class);
 
             r.db("my_database").table("my_table").insert(document).run(connectionFactory.getConnection());
@@ -71,7 +74,17 @@ public class RethinkDBService {
             return null;
         }
     }
+//Connection conn = connectionFactory.getConnection();
+    //Cursor<Map<String, Object> > changeCursor = r.db(database).table(table).changes().run(conn);
 
+        /*for (Object change : changeCursor) {
+            result.add((Map<String, Object>) change);
+        }
+        try {
+            socket_server.broadcast(result);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }*/
 
 }
 
