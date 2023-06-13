@@ -7,4 +7,5 @@ services:
       - "28015:28015"
       - "29015:29015"
     volumes:
-      - "./data:/data"
+      rethink_data:
+        driver: local
