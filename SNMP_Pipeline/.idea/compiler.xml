@@ -8,7 +8,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="SnmpReciever" />
-        <module name="SNMP-trap-generator" />
         <module name="kafkaConsumerSNMP" />
       </profile>
     </annotationProcessing>

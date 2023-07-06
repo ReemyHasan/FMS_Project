@@ -10,22 +10,16 @@ import java.util.List;
 public class TrapData {
     @JsonProperty("enterprise")
     public String enterprise;
-
     @JsonProperty("agentAddress")
     public String agentAddress;
     @JsonProperty("genericTrap")
     public int genericTrap;
-
-
     @JsonProperty("specificTrap")
     public int specificTrap;
-
     @JsonProperty("timestamp")
     public long timestamp;
-
     @JsonProperty("variableBindings")
     public List<VarBind> variableBindings = new ArrayList<VarBind>();
-
     public TrapData(String enterprise, String agentAddress, int genericTrap, int specificTrap, long timestamp, List<VariableBinding> trapVariableBindings) {
         this.enterprise = enterprise;
         this.genericTrap = genericTrap;
@@ -36,7 +30,6 @@ public class TrapData {
             this.variableBindings.add(new VarBind(vb));
         }
     }
-
     public TrapData(PDUv1 pdu){
         this.enterprise = pdu.getEnterprise().toString();
         this.genericTrap = pdu.getGenericTrap();
