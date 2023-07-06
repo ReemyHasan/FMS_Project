@@ -1,12 +1,8 @@
 package com.example.SnmpReciever;
-import com.example.SnmpReciever.Models.TrapData;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.example.SnmpReciever.enitites.TrapData;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import org.snmp4j.*;
-import org.snmp4j.asn1.BER;
-import org.snmp4j.smi.OID;
 import org.snmp4j.smi.UdpAddress;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
 import org.springframework.kafka.core.KafkaTemplate;

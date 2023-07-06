@@ -1,7 +1,6 @@
 package com.example.kafkaConsumerSNMP;
 
-import com.example.kafkaConsumerSNMP.Models.TrapData;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.example.kafkaConsumerSNMP.entities.TrapData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

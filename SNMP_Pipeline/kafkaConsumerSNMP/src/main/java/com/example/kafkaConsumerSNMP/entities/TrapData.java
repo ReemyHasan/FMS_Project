@@ -1,4 +1,4 @@
-package com.example.kafkaConsumerSNMP.Models;
+package com.example.kafkaConsumerSNMP.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.snmp4j.PDUv1;

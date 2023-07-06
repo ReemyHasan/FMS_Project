@@ -1,4 +1,4 @@
-package com.example.SnmpReciever.Models;
+package com.example.SnmpReciever.enitites;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.snmp4j.smi.VariableBinding;
