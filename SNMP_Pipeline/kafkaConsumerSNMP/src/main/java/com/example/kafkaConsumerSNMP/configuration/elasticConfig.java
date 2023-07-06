@@ -23,7 +23,7 @@ import java.io.IOException;
 
 @Configuration
 public class elasticConfig {
-    private RestClient restClient = RestClient.builder(
+    /*private RestClient restClient = RestClient.builder(
             new HttpHost("localhost", 9200)).build();
 
     // Create the transport with a Jackson mapper
@@ -104,5 +104,5 @@ public class elasticConfig {
     }
     public void addDocToDataStream(JsonNode trap){
         elasticClient.indices();
-    }
+    }*/
 }

@@ -30,10 +30,10 @@ public class SyriatelController {
         target.setCommunity(new OctetString("public"));
 
         // Set the IP address and port of the trap receiver
-        target.setAddress(new UdpAddress("localhost/162"));
+        target.setAddress(new UdpAddress("localhost/1625"));
 
         // Set the SNMP version and other parameters
-        target.setVersion(SnmpConstants.version2c);
+        target.setVersion(SnmpConstants.version1);
         target.setTimeout(5000);
         target.setRetries(3);
 
@@ -46,11 +46,15 @@ public class SyriatelController {
             pdu.add(new VariableBinding(SnmpConstants.snmpTrapAddress, new IpAddress("localhost")));
             pdu.add(new VariableBinding(new OID("1.3.6.1.4.1.9999.3.0"), new OctetString("hello world" + i)));
             PDU pdu1 = new PDU();
-            pdu1.setType(PDU.TRAP);
-            pdu1.add(new VariableBinding(new OID("1.3.6.1.2.1.1.3.0"), new TimeTicks(0)));
-            pdu1.add(new VariableBinding(SnmpConstants.snmpTrapOID, trapOID));
-            pdu1.add(new VariableBinding(SnmpConstants.snmpTrapAddress, new IpAddress("localhost")));
-            pdu1.add(new VariableBinding(new OID("1.3.6.1.4.1.9999.3.0"), new OctetString("System-wide failure" + i)));
+            pdu1.setType(PDU.V1TRAP);
+            pdu1.setRequestID(new Integer32(1));
+            pdu1.add(new VariableBinding(SnmpConstants.snmpTrapOID, SnmpConstants.linkDown));
+
+            pdu1.add(new VariableBinding(SnmpConstants.sysUpTime, new UnsignedInteger32(10)));
+            pdu1.add(new VariableBinding(SnmpConstants.snmpTrapAddress, new UdpAddress("127.0.0.1/162")));
+            pdu1.add(new VariableBinding(new OID("1.3.6.1.2.1.1.5.0"), new OctetString("myhostname")));
+            pdu1.add(new VariableBinding(new OID("1.3.6.1.2.1.1.6.0"), new OctetString("mylocation")));
+            pdu1.add(new VariableBinding(new OID("1.3.6.1.2.1.1.8.0"), new Integer32(12345)));
             snmp.send(pdu, target);
             snmp.send(pdu1, target);
         }

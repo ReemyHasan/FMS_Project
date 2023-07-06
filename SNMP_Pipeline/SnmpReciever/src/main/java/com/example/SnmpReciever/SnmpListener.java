@@ -1,7 +1,12 @@
 package com.example.SnmpReciever;
+import com.example.SnmpReciever.Models.TrapData;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.snmp4j.*;
+import org.snmp4j.asn1.BER;
+import org.snmp4j.smi.OID;
 import org.snmp4j.smi.UdpAddress;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -14,7 +19,6 @@ import java.io.IOException;
 @Component
 public class SnmpListener implements CommandResponder {
 
-
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final ObjectMapper objectMapper;
     public SnmpListener(KafkaTemplate<String, String> kafkaTemplate, ObjectMapper objectMapper) {
@@ -24,22 +28,22 @@ public class SnmpListener implements CommandResponder {
 
     @Override
     public synchronized void processPdu(CommandResponderEvent event) {
-        System.out.println("Received PDU...");
-        PDU pdu = event.getPDU();
+        PDUv1 pdu = (PDUv1) event.getPDU();
+        TrapData trapData = new TrapData(pdu);
         if (pdu != null) {
             try {
-                String pduJson = objectMapper.writeValueAsString(pdu);
+                String pduJson = objectMapper.writeValueAsString(trapData);
                 kafkaTemplate.send("TRAP", pduJson);
-                System.out.println(" Hello World"+ pduJson);
             } catch (JsonProcessingException e) {
+                System.out.println(e);
                 throw new RuntimeException(e);
             }
         }
     }
     public void startTrapListener() {
         try {
+            TransportMapping<?> transport = new DefaultUdpTransportMapping(new UdpAddress("localhost/1625"));
             System.out.println("Listening to SNMP Trap");
-            TransportMapping<?> transport = new DefaultUdpTransportMapping(new UdpAddress("localhost/162"));
             Snmp snmp = new Snmp(transport);
             snmp.addCommandResponder(this);
             transport.listen();

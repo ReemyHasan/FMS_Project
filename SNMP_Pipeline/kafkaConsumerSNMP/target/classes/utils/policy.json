@@ -1,0 +1,39 @@
+{
+  "phases": {
+    "hot": {
+      "min_age": "0ms",
+      "actions": {
+        "set_priority": {
+          "priority": 100
+        },
+        "rollover": {
+          "max_primary_shard_size": "50gb",
+          "max_age": "2m"
+        }
+      }
+    },
+    "warm": {
+      "min_age": "2m",
+      "actions": {
+        "set_priority": {
+          "priority": 50
+        }
+      }
+    },
+    "cold": {
+      "min_age": "4m",
+      "actions": {
+        "set_priority": {
+          "priority": 0
+        }
+      }
+    },
+    "delete": {
+      "min_age": "6m",
+      "actions": {
+        "delete": {
+        }
+      }
+    }
+  }
+}

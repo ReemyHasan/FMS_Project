@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SNMP-trap-generator/SNMP-trap-generator.iml" filepath="$PROJECT_DIR$/SNMP-trap-generator/SNMP-trap-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SNMP_Pipeline.iml" filepath="$PROJECT_DIR$/.idea/SNMP_Pipeline.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SnmpReciever/SnmpReciever.iml" filepath="$PROJECT_DIR$/SnmpReciever/SnmpReciever.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kafkaConsumerSNMP/kafkaConsumerSNMP.iml" filepath="$PROJECT_DIR$/kafkaConsumerSNMP/kafkaConsumerSNMP.iml" />
+    </modules>
+  </component>
+</project>
