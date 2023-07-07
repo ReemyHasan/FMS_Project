@@ -1,7 +1,7 @@
 {
-  "index_patterns": ["bashar-data-stream*"],
+  "index_patterns": ["traps-data-stream*"],
   "data_stream": { },
-  "composed_of": [ "bashar_setting", "bashar_mapping" ],
+  "composed_of": [ "traps_setting", "traps_mapping"],
   "priority": 670,
   "_meta": {
     "description": "Template for my time series data",

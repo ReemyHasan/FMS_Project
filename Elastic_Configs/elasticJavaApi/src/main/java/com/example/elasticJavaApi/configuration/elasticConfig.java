@@ -27,6 +27,7 @@ import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
 import com.example.elasticJavaApi.entities.ProcessedTrap;
 import com.example.elasticJavaApi.entities.SeverityLevel;
+import com.example.elasticJavaApi.entities.VarBind;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -132,7 +133,11 @@ public class elasticConfig {
         addComponent(workingPath+"/settings.json","bashar_setting");
         addComponent(workingPath+"/mappings.json","bashar_mapping");
         addIndexTemplate(workingPath+"/index_template.json","bashar_template");
-        ProcessedTrap p = new ProcessedTrap("1.3.2.5.4.6.7","192.168.25.254",6,201,1569845288, SeverityLevel.ERROR, new ArrayList<>(), new GeoPoint(Math.random(),Math.random()));
+        ArrayList arrayList = new ArrayList<VarBind>();
+        VarBind v = new VarBind("1.1.1.1","3232");
+        arrayList.add(v);
+        arrayList.add(v);
+        ProcessedTrap p = new ProcessedTrap("1.3.2.5.4.6.7","192.168.25.254",6,201,1569845288, SeverityLevel.ERROR,arrayList , new GeoPoint(Math.random(),Math.random()));
         ObjectMapper ob = new ObjectMapper();
         //addDataStream("bashar-data-stream-3");
         try {

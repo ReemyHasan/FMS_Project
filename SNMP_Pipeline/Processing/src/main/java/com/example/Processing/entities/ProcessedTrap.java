@@ -1,10 +1,15 @@
 package com.example.Processing.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProcessedTrap {
     @JsonProperty("enterprise")
     public String enterprise;
@@ -14,7 +19,7 @@ public class ProcessedTrap {
     public int genericTrap;
     @JsonProperty("specificTrap")
     public int specificTrap;
-    @JsonProperty("timestamp")
+    @JsonProperty("@timestamp")
     public long timestamp;
 
     @JsonProperty("severity")
@@ -23,11 +28,8 @@ public class ProcessedTrap {
     @JsonProperty("variableBindings")
     public List<VarBind> variableBindings = new ArrayList<VarBind>();
 
-    @JsonProperty("location_X")
-    public double xPoint;
-
-    @JsonProperty("location_Y")
-    public double yPoint;
+    @JsonProperty("location")
+    public GeoPoint Point;
 
 
     public ProcessedTrap(EnrichedTrap pdu) {
@@ -38,7 +40,6 @@ public class ProcessedTrap {
         this.agentAddress = pdu.getAgentAddress().toString();
         this.variableBindings = pdu.getVariableBindings();
         this.severity = pdu.getSeverity();
-        this.xPoint = Math.random();
-        this.yPoint = Math.random();
+        this.Point = new GeoPoint(Math.random(),Math.random());
     }
 }

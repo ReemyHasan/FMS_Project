@@ -49,7 +49,7 @@ public class TrapData {
         this.enterprise = pdu.getEnterprise().toString();
         this.genericTrap = pdu.getGenericTrap();
         this.specificTrap = pdu.getSpecificTrap();
-        this.timestamp = pdu.getTimestamp();
+        this.timestamp = pdu.getTimestamp()*1000;
         this.agentAddress = pdu.getAgentAddress().toString();
         List<VariableBinding> trapVariableBindings = pdu.getAll();
 
