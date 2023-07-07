@@ -5,8 +5,26 @@
         "type": "date",
         "format": "date_optional_time||epoch_millis"
       },
-      "message": {
+      "enterprise": {
+        "type": "text"
+      },
+      "agentAddress": {
+        "type": "text"
+      },
+      "genericTrap": {
+        "type": "long"
+      },
+      "specificTrap": {
+        "type": "long"
+      },
+      "severity": {
+        "type": "text"
+      },
+      "variableBindings": {
         "type": "wildcard"
+      },
+      "location": {
+        "type": "geo_point"
       }
     }
   }

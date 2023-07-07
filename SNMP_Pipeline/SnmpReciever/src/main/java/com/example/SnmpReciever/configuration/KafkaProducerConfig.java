@@ -28,8 +28,6 @@ public class KafkaProducerConfig {
     public ProducerFactory<String, String> producerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        // Set additional Kafka producer properties
-
         return new DefaultKafkaProducerFactory<>(config, new StringSerializer(), new StringSerializer());
     }
 
@@ -37,21 +35,5 @@ public class KafkaProducerConfig {
     public KafkaTemplate<String, String> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
-//@Bean
-//public ConsumerFactory<String, PDU> consumerFactory() {
-//    Map<String, Object> props = new HashMap<>();
-//    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-//    props.put(ConsumerConfig.GROUP_ID_CONFIG, "TRAPId");
-//    return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(),
-//            new JsonDeserializer<>(PDU.class));
-//}
-//
-//    @Bean
-//    public ConcurrentKafkaListenerContainerFactory<String, PDU> kafkaListenerContainerFactory() {
-//        ConcurrentKafkaListenerContainerFactory<String, PDU>
-//                factory = new ConcurrentKafkaListenerContainerFactory<>();
-//        factory.setConsumerFactory(consumerFactory());
-//        return factory;
-//    }
 }
 

@@ -1,0 +1,44 @@
+package com.example.Processing.entities;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ProcessedTrap {
+    @JsonProperty("enterprise")
+    public String enterprise;
+    @JsonProperty("agentAddress")
+    public String agentAddress;
+    @JsonProperty("genericTrap")
+    public int genericTrap;
+    @JsonProperty("specificTrap")
+    public int specificTrap;
+    @JsonProperty("timestamp")
+    public long timestamp;
+
+    @JsonProperty("severity")
+    public SeverityLevel severity;
+
+    @JsonProperty("variableBindings")
+    public List<VarBind> variableBindings = new ArrayList<VarBind>();
+
+    @JsonProperty("location_X")
+    public double xPoint;
+
+    @JsonProperty("location_Y")
+    public double yPoint;
+
+
+    public ProcessedTrap(EnrichedTrap pdu) {
+        this.enterprise = pdu.getEnterprise().toString();
+        this.genericTrap = pdu.getGenericTrap();
+        this.specificTrap = pdu.getSpecificTrap();
+        this.timestamp = pdu.getTimestamp();
+        this.agentAddress = pdu.getAgentAddress().toString();
+        this.variableBindings = pdu.getVariableBindings();
+        this.severity = pdu.getSeverity();
+        this.xPoint = Math.random();
+        this.yPoint = Math.random();
+    }
+}

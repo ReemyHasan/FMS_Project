@@ -6,6 +6,7 @@
         <option value="$PROJECT_DIR$/SNMP-trap-generator/pom.xml" />
         <option value="$PROJECT_DIR$/SnmpReciever/pom.xml" />
         <option value="$PROJECT_DIR$/kafkaConsumerSNMP/pom.xml" />
+        <option value="$PROJECT_DIR$/Processing/pom.xml" />
       </list>
     </option>
   </component>

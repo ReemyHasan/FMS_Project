@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Processing/Processing.iml" filepath="$PROJECT_DIR$/Processing/Processing.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/SNMP_Pipeline.iml" filepath="$PROJECT_DIR$/.idea/SNMP_Pipeline.iml" />
       <module fileurl="file://$PROJECT_DIR$/SnmpReciever/SnmpReciever.iml" filepath="$PROJECT_DIR$/SnmpReciever/SnmpReciever.iml" />
       <module fileurl="file://$PROJECT_DIR$/kafkaConsumerSNMP/kafkaConsumerSNMP.iml" filepath="$PROJECT_DIR$/kafkaConsumerSNMP/kafkaConsumerSNMP.iml" />

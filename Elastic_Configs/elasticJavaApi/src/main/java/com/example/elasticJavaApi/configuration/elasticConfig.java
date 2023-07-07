@@ -4,6 +4,10 @@ import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.Time;
 import co.elastic.clients.elasticsearch.cat.component_templates.ComponentTemplate;
 import co.elastic.clients.elasticsearch.cluster.PutComponentTemplateRequest;
+import co.elastic.clients.elasticsearch.core.BulkRequest;
+import co.elastic.clients.elasticsearch.core.BulkResponse;
+import co.elastic.clients.elasticsearch.core.IndexRequest;
+import co.elastic.clients.elasticsearch.core.IndexResponse;
 import co.elastic.clients.elasticsearch.ilm.IlmPolicy;
 import co.elastic.clients.elasticsearch.ilm.Phase;
 import co.elastic.clients.elasticsearch.ilm.Phases;
@@ -21,6 +25,8 @@ import co.elastic.clients.json.JsonpMapper;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
+import com.example.elasticJavaApi.entities.ProcessedTrap;
+import com.example.elasticJavaApi.entities.SeverityLevel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,11 +36,11 @@ import jakarta.json.JsonValue;
 import jakarta.json.stream.JsonGenerator;
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import org.springframework.data.elasticsearch.core.geo.GeoPoint;
+
+import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -45,8 +51,10 @@ import java.util.Map;
 
 @Configuration
 public class elasticConfig {
+    @Value("${workingPath}")
+    private String workingPath;
     private RestClient restClient = RestClient.builder(
-            new HttpHost("localhost", 9200)).build();
+            new HttpHost("192.168.25.254", 9200)).build();
 
     // Create the transport with a Jackson mapper
     private ElasticsearchTransport transport = new RestClientTransport(
@@ -118,10 +126,57 @@ public class elasticConfig {
     }
     @PostConstruct
     public void ElasticDataStreamConfig() throws JsonProcessingException, FileNotFoundException {
-        addPolicy("src/main/resources/utils/policy.json","Bashar");
-        addComponent("src/main/resources/utils/settings.json","bashar_setting");
-        addComponent("src/main/resources/utils/mappings.json","bashar_mapping");
-        addIndexTemplate("src/main/resources/utils/index_template.json","bashar_template");
-        addDataStream("bashar-data-stream-2");
+        String currentDirectory = System.getProperty("user.dir");
+        System.out.println("Current working directory is: " + currentDirectory);
+        addPolicy(workingPath+"/policy.json","Bashar");
+        addComponent(workingPath+"/settings.json","bashar_setting");
+        addComponent(workingPath+"/mappings.json","bashar_mapping");
+        addIndexTemplate(workingPath+"/index_template.json","bashar_template");
+        ProcessedTrap p = new ProcessedTrap("1.3.2.5.4.6.7","192.168.25.254",6,201,1569845288, SeverityLevel.ERROR, new ArrayList<>(), new GeoPoint(Math.random(),Math.random()));
+        ObjectMapper ob = new ObjectMapper();
+        //addDataStream("bashar-data-stream-3");
+        try {
+            String json = ob.writeValueAsString(p);
+            System.out.println(json);
+            String json1 = json;
+            List<ProcessedTrap> jsons = new ArrayList<>();
+            jsons.add(p);
+            jsons.add(p);
+            this.addDoc(jsons);
+        } catch (Exception e) {
+            System.out.println(e);
+            throw new RuntimeException(e);
+        }
+    }
+    public void addDoc(List<ProcessedTrap> jsons){
+        BulkRequest.Builder br = new BulkRequest.Builder();
+        for (ProcessedTrap s:jsons){
+            br.operations(op -> op
+                    .create(cr -> cr.index("bashar-data-stream-2").document(s))
+            );
+        }
+        BulkResponse result = null;
+        System.out.println("Hey I am here");
+        try {
+            System.out.println("Hey I am here");
+            result = elasticClient.bulk(br.build());
+            System.out.println(result);
+        } catch (IOException e) {
+            System.out.println(e);
+            throw new RuntimeException(e);
+        }
+        /*
+        Reader input = new StringReader(json);
+        IndexRequest<JsonData> request = IndexRequest.of(i -> i
+                .index("bashar-data-stream-2")
+                .withJson(input)
+        );
+        IndexResponse response = null;
+        try {
+            response = elasticClient.index(request);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Indexed with version " + response.version());*/
     }
 }
