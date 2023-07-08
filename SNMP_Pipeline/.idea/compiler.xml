@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="SnmpReciever" />
+        <module name="Web-Application" />
         <module name="kafkaConsumerSNMP" />
         <module name="Processing" />
       </profile>
@@ -17,6 +18,7 @@
       <module name="Processing" target="17" />
       <module name="SNMP-trap-generator" target="17" />
       <module name="SnmpReciever" target="17" />
+      <module name="Web-Application" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -24,6 +26,7 @@
       <module name="Processing" options="-parameters" />
       <module name="SNMP-trap-generator" options="-parameters" />
       <module name="SnmpReciever" options="-parameters" />
+      <module name="Web-Application" options="-parameters" />
       <module name="kafkaConsumerSNMP" options="-parameters" />
     </option>
   </component>

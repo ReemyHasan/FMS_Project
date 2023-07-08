@@ -7,6 +7,7 @@
         <option value="$PROJECT_DIR$/SnmpReciever/pom.xml" />
         <option value="$PROJECT_DIR$/kafkaConsumerSNMP/pom.xml" />
         <option value="$PROJECT_DIR$/Processing/pom.xml" />
+        <option value="$PROJECT_DIR$/Web-Application/pom.xml" />
       </list>
     </option>
   </component>
