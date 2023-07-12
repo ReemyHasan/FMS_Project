@@ -39,7 +39,7 @@ public class elasticConfig {
     @Value("${workingPath}")
     private String workingPath;
     private RestClient restClient = RestClient.builder(
-            new HttpHost("192.168.25.254", 9200)).build();
+            new HttpHost("172.29.3.220", 9200)).build();
 
     // Create the transport with a Jackson mapper
     private  ElasticsearchTransport transport = new RestClientTransport(

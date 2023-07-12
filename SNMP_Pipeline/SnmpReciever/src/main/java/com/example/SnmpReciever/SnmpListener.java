@@ -24,11 +24,17 @@ public class SnmpListener implements CommandResponder {
 
     @Override
     public synchronized void processPdu(CommandResponderEvent event) {
-        PDUv1 pdu = (PDUv1) event.getPDU();
+        System.out.println("Received PDU...");
+        PDU x = event.getPDU();
+//        System.out.println(x);
+//        System.out.println(x.getType());
+//
+        PDUv1 pdu = (PDUv1) x;
         TrapData trapData = new TrapData(pdu);
         if (pdu != null) {
             try {
                 String pduJson = objectMapper.writeValueAsString(trapData);
+//                System.out.println(pduJson);
                 kafkaTemplate.send("TRAP", pduJson);
             } catch (JsonProcessingException e) {
                 System.out.println(e);
@@ -38,7 +44,7 @@ public class SnmpListener implements CommandResponder {
     }
     public void startTrapListener() {
         try {
-            TransportMapping<?> transport = new DefaultUdpTransportMapping(new UdpAddress("localhost/1625"));
+            TransportMapping<?> transport = new DefaultUdpTransportMapping(new UdpAddress("192.168.26.46/1625"));
             System.out.println("Listening to SNMP Trap");
             Snmp snmp = new Snmp(transport);
             snmp.addCommandResponder(this);

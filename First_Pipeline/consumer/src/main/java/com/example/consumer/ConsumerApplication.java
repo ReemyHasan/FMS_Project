@@ -20,7 +20,6 @@ import java.util.Map;
 public class ConsumerApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
-
 		SpringApplication.run(ConsumerApplication.class, args);
 	}
 	private final RethinkDB r = RethinkDB.r;

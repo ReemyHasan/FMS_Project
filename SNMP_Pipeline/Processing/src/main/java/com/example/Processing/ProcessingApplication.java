@@ -52,7 +52,6 @@ public class ProcessingApplication {
 		};
 		// Schedule the task to run every 10 seconds
 		timer.schedule(task, 0, 3000);
-
 	}
 	public void myFunction(){
 		System.out.println("Hey");
