@@ -32,9 +32,9 @@ public class KafkaConsumerSnmpApplication {
 			TrapData t = objectMapper.readValue(json,TrapData.class);
 			//Some Processing: Add this later
 			EnrichedTrap t2 = new EnrichedTrap(t);
-			//System.out.println("Not sent yet");
-			//sender.send(t2);
-			//System.out.println("Sent now!");
+			System.out.println("Not sent yet");
+			sender.send(t2);
+			System.out.println("Sent now!");
 			rethinkDBService.saveKafkaMessageToRethink(t2);
 			if (num == 1)
 				System.out.println(rethinkDBService.getData());

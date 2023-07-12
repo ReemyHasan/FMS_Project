@@ -1,7 +1,9 @@
 package com.example.SnmpReciever;
 import com.example.SnmpReciever.enitites.TrapData;
+//import com.example.SnmpReciever.services.KafkaService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
 import org.snmp4j.*;
 import org.snmp4j.smi.UdpAddress;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
@@ -13,14 +15,12 @@ import java.io.IOException;
 /*@RestController
 @RequestMapping("/api/product")*/
 @Component
+@AllArgsConstructor
 public class SnmpListener implements CommandResponder {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final ObjectMapper objectMapper;
-    public SnmpListener(KafkaTemplate<String, String> kafkaTemplate, ObjectMapper objectMapper) {
-        this.kafkaTemplate = kafkaTemplate;
-        this.objectMapper = objectMapper;
-    }
+
 
     @Override
     public synchronized void processPdu(CommandResponderEvent event) {
@@ -44,7 +44,7 @@ public class SnmpListener implements CommandResponder {
     }
     public void startTrapListener() {
         try {
-            TransportMapping<?> transport = new DefaultUdpTransportMapping(new UdpAddress("192.168.25.254/1625"));
+            TransportMapping<?> transport = new DefaultUdpTransportMapping(new UdpAddress("192.168.26.46/1625"));
             System.out.println("Listening to SNMP Trap");
             Snmp snmp = new Snmp(transport);
             snmp.addCommandResponder(this);

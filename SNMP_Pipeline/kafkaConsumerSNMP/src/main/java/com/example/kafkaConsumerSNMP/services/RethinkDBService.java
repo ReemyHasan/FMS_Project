@@ -35,9 +35,7 @@ public class RethinkDBService {
             System.out.println(jsonString);
             System.out.println(jsonNode);
             System.out.println(document);
-            System.out.println("I am here reem " + connectionFactory.getDbName() + " " + connectionFactory.getDbTableName());
             r.db(connectionFactory.getDbName()).table(connectionFactory.getDbTableName()).insert(document).run(connectionFactory.getConnection());
-            System.out.println("I am here now reem");
         } catch (Exception e) {
             System.out.println("error " + e);
         }

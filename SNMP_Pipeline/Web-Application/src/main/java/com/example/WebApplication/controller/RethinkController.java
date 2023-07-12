@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin("192.168.25.254:3000")
 @RequestMapping("/api/rethink")
-@CrossOrigin(origins = {"http://localhost:3000"})
 public class RethinkController {
     @Autowired
     private RethinkDBService rethinkDBService;
@@ -24,7 +24,6 @@ public class RethinkController {
     public void delete(@RequestBody String id){
         rethinkDBService.deleteById(id);
     }
-
     @GetMapping("/data")
     public ResponseEntity<List<Map<String, Object>>> getData() {
         List<Map<String, Object>> result = rethinkDBService.getData();
