@@ -34,10 +34,10 @@ public class RethinkDBService{
             String jsonString = objectMapper.writeValueAsString(rethinkTrap);
             JsonNode jsonNode = objectMapper.readTree(jsonString);
             Map<String,EnrichedTrap> document = objectMapper.convertValue(jsonNode, Map.class);
-            System.out.println(jsonString);
-            System.out.println(jsonNode);
-            System.out.println(document);
-            System.out.println("I am here reem " + connectionFactory.getDbName() + " " + connectionFactory.getDbTableName());
+//            System.out.println(jsonString);
+//            System.out.println(jsonNode);
+//            System.out.println(document);
+//            System.out.println("I am here reem " + connectionFactory.getDbName() + " " + connectionFactory.getDbTableName());
             r.db(connectionFactory.getDbName()).table(connectionFactory.getDbTableName()).insert(document).run(connectionFactory.getConnection());
             System.out.println("I am here now reem");
         } catch (Exception e) {

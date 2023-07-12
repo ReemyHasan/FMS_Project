@@ -44,7 +44,7 @@ public class SnmpListener implements CommandResponder {
     }
     public void startTrapListener() {
         try {
-            TransportMapping<?> transport = new DefaultUdpTransportMapping(new UdpAddress("192.168.26.46/1625"));
+            TransportMapping<?> transport = new DefaultUdpTransportMapping(new UdpAddress("192.168.25.254/1625"));
             System.out.println("Listening to SNMP Trap");
             Snmp snmp = new Snmp(transport);
             snmp.addCommandResponder(this);

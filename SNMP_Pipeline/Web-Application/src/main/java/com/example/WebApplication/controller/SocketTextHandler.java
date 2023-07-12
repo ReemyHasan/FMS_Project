@@ -25,8 +25,6 @@ import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component
-@RestController
-@RequestMapping("/api/rethink")
 public class SocketTextHandler extends TextWebSocketHandler implements CommandLineRunner {
     private List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
 
@@ -98,8 +96,8 @@ public class SocketTextHandler extends TextWebSocketHandler implements CommandLi
     public void run(String... args) throws Exception {
         Cursor<RethinkChange> changeCursor = rethinkDBService.subscribe();
         System.out.println("I am Subscribing");
-        System.out.println(changeCursor.getClass());
-        System.out.println(changeCursor);
+//        System.out.println(changeCursor.getClass());
+//        System.out.println(changeCursor);
         //List<RethinkChange> result = new ArrayList<>();
         for (RethinkChange change : changeCursor){
             System.out.println("Something Changed ");
@@ -112,8 +110,4 @@ public class SocketTextHandler extends TextWebSocketHandler implements CommandLi
         }
     }
 
-    @PostMapping("/delete")
-    public void delete(@RequestBody String id){
-        rethinkDBService.deleteById(id);
-    }
 }
