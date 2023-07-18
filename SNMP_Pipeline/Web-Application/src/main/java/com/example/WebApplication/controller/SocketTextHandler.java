@@ -55,7 +55,7 @@ public class SocketTextHandler extends TextWebSocketHandler implements CommandLi
         System.out.println(message);
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String json = ow.writeValueAsString(message);
-        System.out.println(json);
+//        System.out.println(json);
         TextMessage s = new TextMessage(json);
         //System.out.println(s);
         for (WebSocketSession session : sessions) {
@@ -72,7 +72,7 @@ public class SocketTextHandler extends TextWebSocketHandler implements CommandLi
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(json);
+//        System.out.println(json);
         TextMessage s = new TextMessage(json);
         if (session.isOpen()) {
             try {

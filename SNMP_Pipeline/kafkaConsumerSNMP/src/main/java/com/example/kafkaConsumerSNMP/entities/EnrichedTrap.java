@@ -7,6 +7,7 @@ import org.snmp4j.PDUv1;
 import org.snmp4j.smi.VariableBinding;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 @Setter
 @Getter
@@ -22,6 +23,8 @@ public class EnrichedTrap {
     @JsonProperty("timestamp")
     public long timestamp;
 
+    @JsonProperty("date")
+    public long date;
     @JsonProperty("severity")
     public SeverityLevel severity;
 
@@ -35,6 +38,7 @@ public class EnrichedTrap {
         this.timestamp = pdu.getTimestamp();
         this.agentAddress = pdu.getAgentAddress().toString();
         this.variableBindings = pdu.getVariableBindings();
+        this.date = new Date().getTime();
         if (this.variableBindings.size() > 5){
             this.severity = SeverityLevel.WARNING;
         }

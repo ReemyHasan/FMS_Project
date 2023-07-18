@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin("192.168.25.254:3000")
+@CrossOrigin("*")
 @RequestMapping("/api/rethink")
 public class RethinkController {
     @Autowired
@@ -27,7 +27,7 @@ public class RethinkController {
     @GetMapping("/data")
     public ResponseEntity<List<Map<String, Object>>> getData() {
         List<Map<String, Object>> result = rethinkDBService.getData();
-        System.out.println(result);
+//        System.out.println(result);
         if (result != null) {
             return ResponseEntity.ok(result);
         } else {

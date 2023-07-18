@@ -26,9 +26,8 @@ public class RethinkDBService {
 
     public void saveKafkaMessageToRethink(EnrichedTrap rethinkTrap) {
         try {
+            System.out.println(rethinkTrap.getDate());
             ObjectMapper objectMapper = new ObjectMapper();
-//
-
             String jsonString = objectMapper.writeValueAsString(rethinkTrap);
             JsonNode jsonNode = objectMapper.readTree(jsonString);
             Map<String,EnrichedTrap> document = objectMapper.convertValue(jsonNode, Map.class);

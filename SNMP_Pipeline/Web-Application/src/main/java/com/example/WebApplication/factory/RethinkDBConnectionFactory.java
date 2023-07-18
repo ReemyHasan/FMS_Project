@@ -33,6 +33,12 @@ public class RethinkDBConnectionFactory {
     @Value("${rethinkDBTableName}")
     private String dbTableName;
 
+    @Value("${rethinkDBAbout}")
+    private String dbAbout;
+
+    @Value("${rethinkDBAboutTable}")
+    private String dbTableAbout;
+
     @PostConstruct
     public Connection init() {
         try {
@@ -40,18 +46,28 @@ public class RethinkDBConnectionFactory {
             log.info("RethinkDB connected successfully");
             List<String> dbList = r.dbList().run(connection);
             if (!dbList.contains(dbName)) {
-//                System.out.println("Creating DATABASE Heeeeeeeeeeeeeeeeeeeeeeeeeere");
+                System.out.println("Creating DATABASE");
                 r.dbCreate(dbName).run(connection);
             }
+
             List<String> tables = r.db(dbName).tableList().run(connection);
             if (!tables.contains(dbTableName)) {
-//                System.out.println("Creating Table Heeeeeeeeeeeeeeeeeeeeeeeeeere");
+                System.out.println("Creating Table");
                 r.db(dbName).tableCreate(dbTableName).run(connection);
                 //r.db(dbName).table(dbTableName).indexCreate("timestamp").run(connection);
                 //r.db("my_database").table("my_table").indexCreate("trap").run(connection);
             }
+            if (!dbList.contains(dbAbout)) {
+                System.out.println("Creating DATABASE");
+                r.dbCreate(dbAbout).run(connection);
+            }
+            List<String> aboutTables = r.db(dbAbout).tableList().run(connection);
+            if (!tables.contains(dbTableAbout)) {
+                System.out.println("Creating Table");
+                r.db(dbAbout).tableCreate(dbTableAbout).run(connection);
+            }
         } catch (Exception e) {
-            log.error("Error connecting to RethinkDB", e);
+            log.error("Error connecting to RethinkDB");
         }
         return null;
     }
