@@ -9,7 +9,16 @@
     <file url="file://$PROJECT_DIR$/SnmpReciever/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Web-Application/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Web-Application/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/api-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/api-gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/identity-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/identity-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/kafkaConsumerSNMP/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/kafkaConsumerSNMP/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service-discovery/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service-discovery/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service-registry/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user-service/src/main/resources" charset="UTF-8" />
   </component>
 </project>
