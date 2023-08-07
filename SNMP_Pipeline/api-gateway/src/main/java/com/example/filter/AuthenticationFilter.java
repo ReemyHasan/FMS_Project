@@ -49,8 +49,8 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
             return chain.filter(exchange);
         });
     }
-
     public static class Config {
 
     }
+
 }

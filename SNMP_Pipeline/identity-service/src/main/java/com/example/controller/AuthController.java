@@ -21,21 +21,29 @@ public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @PostMapping("/register")
-    public Optional<UserCredential> addNewUser(@RequestBody UserCredential user) {
-        return service.saveUser(user);
-    }
-
     @PostMapping("/token")
     public String getToken(@RequestBody AuthRequest authRequest) {
-        System.out.println("Hi"+ authRequest);
-        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-
-        if (authenticate.isAuthenticated()) {
-            return service.generateToken(authRequest.getUsername());
-        } else {
-            throw new RuntimeException("invalid access");
+        System.out.println("Hi" + authRequest);
+        try {
+            Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+            System.out.println("HEY");
+            if (authenticate.isAuthenticated()) {
+                return service.generateToken(authRequest.getUsername());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Invalid Access";
         }
+
+//        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+//        System.out.println("HEY");
+//        if (authenticate.isAuthenticated()) {
+//            return service.generateToken(authRequest.getUsername());
+//        } else {
+//            System.out.println("invalid access");
+//            throw new RuntimeException("invalid access");
+//        }
+        return null;
     }
 
     @GetMapping("/validate")

@@ -72,4 +72,10 @@ public class SettingController {
             return ResponseEntity.ok(false);
         }
     }
+
+    @PostMapping("/translate")
+    public ResponseEntity<String> translateText(@RequestBody String request) {
+//        String translatedText = settingService.translateText(request.getSourceText(), request.getTargetLanguage());
+        return ResponseEntity.ok(request);
+    }
 }

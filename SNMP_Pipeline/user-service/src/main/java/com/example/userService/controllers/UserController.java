@@ -36,6 +36,10 @@ public class UserController {
             return false;
         }
     }
+    @PostMapping("/register")
+    public Optional<UserCredential> addNewUser(@RequestBody UserCredential user) {
+        return userService.saveUser(user);
+    }
 
     @GetMapping("/getAllUsers")
     public Iterable<UserCredential> getAllUsers() {

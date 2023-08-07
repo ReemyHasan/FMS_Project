@@ -9,10 +9,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.kafka.annotation.KafkaListener;
 
 @SpringBootApplication
 @AllArgsConstructor
+@EnableDiscoveryClient
 public class KafkaConsumerSnmpApplication {
 	private final Sender sender;
 	public static void main(String[] args) {

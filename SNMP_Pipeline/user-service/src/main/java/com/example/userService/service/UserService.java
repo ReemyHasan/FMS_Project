@@ -23,6 +23,19 @@ public class UserService {
     public Optional<UserCredential> getUserByUsername(String username){
         return repository.findByUsername(username);
     }
+
+    public Optional<UserCredential> saveUser(UserCredential credential) {
+//        System.out.println("dskmdelkwmelkamdk     "+credential);
+        credential.setPassword(passwordEncoder.encode(credential.getPassword()));
+        try {
+            repository.save(credential);
+            return repository.findByUsername(credential.getUsername());
+        }
+        catch (Exception e){
+            System.out.println(e);
+            return Optional.of(credential);
+        }
+    }
     public boolean deleteUserByID(int id){
         try {
             repository.deleteById(id);
