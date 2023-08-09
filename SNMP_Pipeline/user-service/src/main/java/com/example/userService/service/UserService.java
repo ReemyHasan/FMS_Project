@@ -69,4 +69,11 @@ public class UserService {
             return false;
         }
     }
+
+    public long getAdminsCount() {
+        return repository.countAdmins();
+    }
+    public long getUsersCount() {
+        return repository.countUsers();
+    }
 }

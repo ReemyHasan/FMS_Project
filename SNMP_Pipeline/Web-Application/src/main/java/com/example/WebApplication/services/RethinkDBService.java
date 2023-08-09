@@ -106,5 +106,56 @@ public class RethinkDBService{
             return null;
         }
     }
+    public long getTrapCount() {
+        try {
+            long count = r.db(connectionFactory.getDbName())
+                    .table(connectionFactory.getDbTableName())
+                    .count()
+                    .run(connectionFactory.getConnection());
+            return count;
+        } catch (Exception e) {
+            log.error("Error getting trap count from RethinkDB", e);
+            return 0;
+        }
+    }
+    public long getErrorTrapCount() {
+        try {
+            long count = r.db(connectionFactory.getDbName())
+                    .table(connectionFactory.getDbTableName())
+                    .filter(r.hashMap("severity", "ERROR"))
+                    .count()
+                    .run(connectionFactory.getConnection());
+            return count;
+        } catch (Exception e) {
+            log.error("Error getting error trap count from RethinkDB", e);
+            return 0;
+        }
+    }
+    public long getWarningTrapCount() {
+        try {
+            long count = r.db(connectionFactory.getDbName())
+                    .table(connectionFactory.getDbTableName())
+                    .filter(r.hashMap("severity", "WARNING"))
+                    .count()
+                    .run(connectionFactory.getConnection());
+            return count;
+        } catch (Exception e) {
+            log.error("Error getting warning trap count from RethinkDB", e);
+            return 0;
+        }
+    }
+    public long getInfoTrapCount() {
+        try {
+            long count = r.db(connectionFactory.getDbName())
+                    .table(connectionFactory.getDbTableName())
+                    .filter(r.hashMap("severity", "INFO"))
+                    .count()
+                    .run(connectionFactory.getConnection());
+            return count;
+        } catch (Exception e) {
+            log.error("Error getting info trap count from RethinkDB", e);
+            return 0;
+        }
+    }
 }
 

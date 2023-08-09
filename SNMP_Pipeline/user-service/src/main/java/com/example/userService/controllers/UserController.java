@@ -60,5 +60,23 @@ public class UserController {
             return false;
         }
     }
+    @GetMapping("/getAdminCount")
+    public long getAdminsCount() {
+
+        try {
+            return userService.getAdminsCount();
+        }catch (Exception e){
+            return 0;
+        }
+    }
+    @GetMapping("/getUsersCount")
+    public long getUsersCount() {
+
+        try {
+            return userService.getUsersCount();
+        }catch (Exception e){
+            return 0;
+        }
+    }
 }
 

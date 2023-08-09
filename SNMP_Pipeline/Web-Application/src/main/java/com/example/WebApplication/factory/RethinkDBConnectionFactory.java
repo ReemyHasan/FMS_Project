@@ -54,16 +54,15 @@ public class RethinkDBConnectionFactory {
             if (!tables.contains(dbTableName)) {
                 System.out.println("Creating Table");
                 r.db(dbName).tableCreate(dbTableName).run(connection);
-                //r.db(dbName).table(dbTableName).indexCreate("timestamp").run(connection);
-                //r.db("my_database").table("my_table").indexCreate("trap").run(connection);
             }
             if (!dbList.contains(dbAbout)) {
                 System.out.println("Creating DATABASE");
                 r.dbCreate(dbAbout).run(connection);
             }
             List<String> aboutTables = r.db(dbAbout).tableList().run(connection);
-            if (!tables.contains(dbTableAbout)) {
-                System.out.println("Creating Table");
+
+            if (!aboutTables.contains(dbTableAbout)) {
+                System.out.println("Creating About Table");
                 r.db(dbAbout).tableCreate(dbTableAbout).run(connection);
             }
         } catch (Exception e) {
