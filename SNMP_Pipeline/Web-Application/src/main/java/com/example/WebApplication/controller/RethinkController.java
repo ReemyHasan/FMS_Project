@@ -1,6 +1,6 @@
 package com.example.WebApplication.controller;
 
-import com.example.WebApplication.controller.SocketTextHandler;
+//import com.example.WebApplication.controller.SocketTextHandler;
 import com.example.WebApplication.entities.RethinkChange;
 import com.example.WebApplication.services.RethinkDBService;
 import com.rethinkdb.net.Cursor;
@@ -27,7 +27,6 @@ public class RethinkController {
     @GetMapping("/data")
     public ResponseEntity<List<Map<String, Object>>> getData() {
         List<Map<String, Object>> result = rethinkDBService.getData();
-//        System.out.println(result);
         if (result != null) {
             return ResponseEntity.ok(result);
         } else {
