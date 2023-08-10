@@ -87,6 +87,10 @@ public class SnmpListener implements CommandResponder {
         MessageDispatcher mDispatcher = new MultiThreadedMessageDispatcher(
                 threadPool, new MessageDispatcherImpl());
 
+        // Create Target
+        CommunityTarget target = new CommunityTarget();
+        target.setCommunity(new OctetString(community));
+
         // add message processing models
         mDispatcher.addMessageProcessingModel(new MPv1());
         mDispatcher.addMessageProcessingModel(new MPv2c());
@@ -95,13 +99,9 @@ public class SnmpListener implements CommandResponder {
         SecurityProtocols.getInstance().addDefaultProtocols();
         SecurityProtocols.getInstance().addPrivacyProtocol(new Priv3DES());
 
-        // Create Target
-        CommunityTarget target = new CommunityTarget();
-        target.setCommunity(new OctetString(community));
 
         Snmp snmp = new Snmp(mDispatcher, transport);
         snmp.addCommandResponder(this);
-
         transport.listen();
         System.out.println("Listening on " + address);
         try {
