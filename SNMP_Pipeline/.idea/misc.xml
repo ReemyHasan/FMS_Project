@@ -16,6 +16,8 @@
         <option value="$PROJECT_DIR$/api-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/identity-service/pom.xml" />
         <option value="$PROJECT_DIR$/user-service/pom.xml" />
+        <option value="$PROJECT_DIR$/Trap Stream/pom.xml" />
+        <option value="$PROJECT_DIR$/TrapStream/pom.xml" />
       </list>
     </option>
   </component>

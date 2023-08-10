@@ -40,15 +40,11 @@ public class RethinkDBConnectionFactory {
             log.info("RethinkDB connected successfully");
             List<String> dbList = r.dbList().run(connection);
             if (!dbList.contains(dbName)) {
-//                System.out.println("Creating DATABASE Heeeeeeeeeeeeeeeeeeeeeeeeeere");
                 r.dbCreate(dbName).run(connection);
             }
             List<String> tables = r.db(dbName).tableList().run(connection);
             if (!tables.contains(dbTableName)) {
-//                System.out.println("Creating Table Heeeeeeeeeeeeeeeeeeeeeeeeeere");
                 r.db(dbName).tableCreate(dbTableName).run(connection);
-                //r.db(dbName).table(dbTableName).indexCreate("timestamp").run(connection);
-                //r.db("my_database").table("my_table").indexCreate("trap").run(connection);
             }
         } catch (Exception e) {
             log.error("Error connecting to RethinkDB", e);

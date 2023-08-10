@@ -9,6 +9,8 @@ import org.snmp4j.smi.VariableBinding;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
+
 @Setter
 @Getter
 public class EnrichedTrap {
@@ -39,10 +41,18 @@ public class EnrichedTrap {
         this.agentAddress = pdu.getAgentAddress().toString();
         this.variableBindings = pdu.getVariableBindings();
         this.date = new Date().getTime();
-        if (this.variableBindings.size() > 5){
+
+        int[] choices = {1, 2, 3};
+
+        Random random = new Random();
+        int randomIndex = random.nextInt(choices.length);
+
+        int randomChoice = choices[randomIndex];
+
+        if (randomChoice == 1){
             this.severity = SeverityLevel.WARNING;
         }
-        else if (this.variableBindings.size() >= 3){
+        else if (randomChoice == 2){
             this.severity = SeverityLevel.ERROR;
         }
         else this.severity = SeverityLevel.INFO;

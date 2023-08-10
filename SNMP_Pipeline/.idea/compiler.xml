@@ -8,12 +8,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="SnmpReciever" />
+        <module name="TrapStream" />
         <module name="Web-Application" />
         <module name="api-gateway" />
         <module name="user-service" />
         <module name="identity-service" />
         <module name="service-registry" />
-        <module name="Processing" />
         <module name="kafkaConsumerSNMP" />
       </profile>
     </annotationProcessing>
@@ -22,10 +22,11 @@
       <module name="api-gateway" target="17" />
       <module name="identity-service" target="17" />
       <module name="kafkaConsumerSNMP" target="17" />
-      <module name="Processing" target="17" />
       <module name="service-discovery" target="1.5" />
       <module name="service-registry" target="17" />
       <module name="SnmpReciever" target="17" />
+      <module name="Trap Stream" target="17" />
+      <module name="TrapStream" target="17" />
       <module name="user-service" target="17" />
       <module name="Web-Application" target="17" />
     </bytecodeTargetLevel>
@@ -33,8 +34,9 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Api-gateway" options="" />
-      <module name="Processing" options="-parameters" />
       <module name="SnmpReciever" options="-parameters" />
+      <module name="Trap Stream" options="-parameters" />
+      <module name="TrapStream" options="-parameters" />
       <module name="Web-Application" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
       <module name="identity-service" options="-parameters" />

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Processing/Processing.iml" filepath="$PROJECT_DIR$/Processing/Processing.iml" />
       <module fileurl="file://$PROJECT_DIR$/SnmpReciever/SnmpReciever.iml" filepath="$PROJECT_DIR$/SnmpReciever/SnmpReciever.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TrapStream/TrapStream.iml" filepath="$PROJECT_DIR$/TrapStream/TrapStream.iml" />
       <module fileurl="file://$PROJECT_DIR$/Web-Application/Web-Application.iml" filepath="$PROJECT_DIR$/Web-Application/Web-Application.iml" />
       <module fileurl="file://$PROJECT_DIR$/api-gateway/api-gateway.iml" filepath="$PROJECT_DIR$/api-gateway/api-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/identity-service/identity-service.iml" filepath="$PROJECT_DIR$/identity-service/identity-service.iml" />
