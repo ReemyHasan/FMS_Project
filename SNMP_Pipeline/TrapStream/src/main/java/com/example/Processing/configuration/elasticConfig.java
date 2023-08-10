@@ -41,11 +41,9 @@ public class elasticConfig {
     private RestClient restClient = RestClient.builder(
             new HttpHost("172.29.3.220", 9200)).build();
 
-    // Create the transport with a Jackson mapper
     private  ElasticsearchTransport transport = new RestClientTransport(
             restClient, new JacksonJsonpMapper());
 
-    // And create the API client
     private ElasticsearchClient elasticClient = new ElasticsearchClient(transport);
     public void addPolicy(String path,String name){
         FileReader r = null;
@@ -87,8 +85,6 @@ public class elasticConfig {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-//        IndexTemplate indexTemplate = new IndexTemplate.Builder().withJson(r).build();
-//        IndexTemplateMapping indexTemplateMapping = new IndexTemplateMapping.Builder().withJson(r).build();
         PutIndexTemplateRequest putIndexTemplateRequest = new PutIndexTemplateRequest
                 .Builder()
                 .withJson(r)
@@ -140,18 +136,6 @@ public class elasticConfig {
             System.out.println(e);
             throw new RuntimeException(e);
         }
-        /*
-        Reader input = new StringReader(json);
-        IndexRequest<JsonData> request = IndexRequest.of(i -> i
-                .index("bashar-data-stream-2")
-                .withJson(input)
-        );
-        IndexResponse response = null;
-        try {
-            response = elasticClient.index(request);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println("Indexed with version " + response.version());*/
+
     }
 }

@@ -27,7 +27,7 @@ public class TrapStreamApplication {
 	private ElasticService elasticService;
 	@KafkaListener(topics = "EnrichedTrap")
 	public void handleKafkaMessage(String pduJson) {
-		String json = pduJson; // Replace with your JSON string
+		String json = pduJson;
 		num++;
 		try {
 			ObjectMapper objectMapper = new ObjectMapper();
@@ -39,22 +39,19 @@ public class TrapStreamApplication {
 			System.out.println(e);
 			e.printStackTrace();
 		}
-		//System.out.println(num);
+		System.out.println(num);
 	}
 	@PostConstruct
 	public void magic(){
 		Timer timer = new Timer();
 		TimerTask task = new TimerTask() {
 			public void run() {
-				// Call your function here
 				myFunction();
 			}
 		};
-		// Schedule the task to run every 10 seconds
 		timer.schedule(task, 0, 3000);
 	}
 	public void myFunction(){
-		System.out.println("Hey");
 		elasticService.sendBulk();
 	}
 }

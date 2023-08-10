@@ -59,9 +59,7 @@ public class ElasticService {
         System.out.println("Sent "+bulk.size());
         bulk.clear();
         BulkResponse result = null;
-        System.out.println("Hey I am here");
         try {
-            System.out.println("Hey I am here");
             result = elConf.getElasticClient().bulk(br.build());
             System.out.println(result);
         } catch (IOException e) {

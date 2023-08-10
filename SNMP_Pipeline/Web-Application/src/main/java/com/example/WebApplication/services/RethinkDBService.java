@@ -51,7 +51,6 @@ public class RethinkDBService{
             JsonNode jsonNode = objectMapper.readTree(jsonString);
             Map<String,EnrichedTrap> document = objectMapper.convertValue(jsonNode, Map.class);
             r.db(connectionFactory.getDbName()).table(connectionFactory.getDbTableName()).insert(document).run(connectionFactory.getConnection());
-            System.out.println("I am here now reem");
         } catch (Exception e) {
             System.out.println("error " + e);
         }
@@ -82,7 +81,7 @@ public class RethinkDBService{
                     eventPublisher.publishEvent(new RethinkAppChange(this, changedData.getOld_val(), changedData.getNew_val()));
                 }
             } catch (Exception e) {
-                System.out.println("Bkh");
+                System.out.println("error "+e);
             }});
     }
     public void deleteById(String id){

@@ -23,10 +23,8 @@ public class AuthController {
 
     @PostMapping("/token")
     public String getToken(@RequestBody AuthRequest authRequest) {
-        System.out.println("Hi" + authRequest);
         try {
             Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-            System.out.println("HEY");
             if (authenticate.isAuthenticated()) {
                 return service.generateToken(authRequest.getUsername());
             }
@@ -34,15 +32,6 @@ public class AuthController {
             e.printStackTrace();
             return "Invalid Access";
         }
-
-//        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-//        System.out.println("HEY");
-//        if (authenticate.isAuthenticated()) {
-//            return service.generateToken(authRequest.getUsername());
-//        } else {
-//            System.out.println("invalid access");
-//            throw new RuntimeException("invalid access");
-//        }
         return null;
     }
 

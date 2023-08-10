@@ -20,7 +20,6 @@ public class AuthService {
     private JwtService jwtService;
 
     public Optional<UserCredential> saveUser(UserCredential credential) {
-//        System.out.println("dskmdelkwmelkamdk     "+credential);
         credential.setPassword(passwordEncoder.encode(credential.getPassword()));
         try {
             repository.save(credential);

@@ -34,16 +34,6 @@ public class TrapData {
     @JsonProperty("variableBindings")
     public List<VarBind> variableBindings = new ArrayList<VarBind>();
 
-//    public TrapData(String enterprise, String agentAddress, int genericTrap, int specificTrap, long timestamp, List<VariableBinding> trapVariableBindings) {
-//        this.enterprise = enterprise;
-//        this.genericTrap = genericTrap;
-//        this.specificTrap = specificTrap;
-//        this.timestamp = timestamp;
-//        this.agentAddress = agentAddress;
-//        for (VariableBinding vb : trapVariableBindings) {
-//            this.variableBindings.add(new VarBind(vb));
-//        }
-//    }
 
     public TrapData(PDUv1 pdu){
         this.enterprise = pdu.getEnterprise().toString();
@@ -58,56 +48,6 @@ public class TrapData {
         }
     }
 
-//    public TrapData() {
-//    }
-
-//    public String getEnterprise() {
-//        return enterprise;
-//    }
-//
-//    public void setEnterprise(String enterprise) {
-//        this.enterprise = enterprise;
-//    }
-//
-//    public int getGenericTrap() {
-//        return genericTrap;
-//    }
-//
-//    public void setGenericTrap(int genericTrap) {
-//        this.genericTrap = genericTrap;
-//    }
-//
-//    public int getSpecificTrap() {
-//        return specificTrap;
-//    }
-//
-//    public void setSpecificTrap(int specificTrap) {
-//        this.specificTrap = specificTrap;
-//    }
-//
-//    public long getTimestamp() {
-//        return timestamp;
-//    }
-//
-//    public void setTimestamp(long timestamp) {
-//        this.timestamp = timestamp;
-//    }
-//
-//    public List<VarBind> getVariableBindings() {
-//        return variableBindings;
-//    }
-//
-//    public void setVariableBindings(List<VarBind> variableBindings) {
-//        this.variableBindings = variableBindings;
-//    }
-//
-//    public String getAgentAddress() {
-//        return agentAddress;
-//    }
-//
-//    public void setAgentAddress(String agentAddress) {
-//        this.agentAddress = agentAddress;
-//    }
     public void print(){
         System.out.println("enterprise = " + this.getEnterprise());
         System.out.println("enterprise = " + this.getAgentAddress());

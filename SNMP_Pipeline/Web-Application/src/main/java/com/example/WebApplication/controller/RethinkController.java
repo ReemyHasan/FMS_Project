@@ -53,9 +53,8 @@ public class RethinkController {
 
         for (Map<String, Object> rawEntry : rawResults) {
             String severityLevel = rawEntry.get("severity").toString();
-            long timestamp = (long) rawEntry.get("timestamp"); // Assuming timestamp is a long value representing Unix timestamp in milliseconds
+            long timestamp = (long) rawEntry.get("timestamp");
 
-            // Convert Unix timestamp to a Date and extract hour
             String hour = convertTimestampToHour(timestamp);
 
             processedData.putIfAbsent(hour, new HashMap<>());
@@ -69,7 +68,7 @@ public class RethinkController {
 
     private String convertTimestampToHour(long timestamp) {
         Date date = new Date(timestamp);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm"); // Customize the format as needed
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return sdf.format(date);
     }
 
