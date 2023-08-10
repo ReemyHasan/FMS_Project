@@ -1,0 +1,9 @@
+{
+  "index_patterns": ["knowledge-base*"],
+  "composed_of": [ "knowledge-base-setting", "knowledge-base-mapping"],
+  "priority": 700,
+  "_meta": {
+    "description": "Template for my knowledge base data",
+    "my-custom-meta-field": "More arbitrary metadata"
+  }
+}
