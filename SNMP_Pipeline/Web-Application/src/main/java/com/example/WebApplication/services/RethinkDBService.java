@@ -74,11 +74,14 @@ public class RethinkDBService{
         singleThreadExecutor.execute(() -> {
             try {
                 Connection connection = connectionFactory.getConnection();
-                Cursor<RethinkChange> changeCursor = r.db(connectionFactory.getDbName()).table(connectionFactory.getDbTableName()).changes().optArg("include_initial", true).
+                Cursor<RethinkChange> changeCursor = r.db(connectionFactory.getDbName()).
+                        table(connectionFactory.getDbTableName())
+                        .changes().optArg("include_initial", true).
                         run(connection, RethinkChange.class);
                 while (changeCursor.hasNext()) {
                     RethinkChange changedData = changeCursor.next();
-                    eventPublisher.publishEvent(new RethinkAppChange(this, changedData.getOld_val(), changedData.getNew_val()));
+                    eventPublisher.publishEvent(
+                            new RethinkAppChange(this, changedData.getOld_val(), changedData.getNew_val()));
                 }
             } catch (Exception e) {
                 System.out.println("error "+e);
