@@ -27,7 +27,6 @@ public class SseEmitters {
     public void send(Object obj) {
         List<SseEmitter> failedEmitters = new ArrayList<>();
         this.emitters.forEach(emitter -> {
-            System.out.println("Kill me");
             try {
                 emitter.send(obj);
             } catch (Exception e) {
