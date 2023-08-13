@@ -1,0 +1,12 @@
+{
+  "index_patterns": ["model-data-stream*"],
+  "data_stream": { },
+  "composed_of": [ "model-setting", "model-mapping"],
+  "priority": 670,
+  "_meta": {
+    "description": "Template for my time series data",
+    "my-custom-meta-field": "More arbitrary metadata"
+  }
+}
+
+

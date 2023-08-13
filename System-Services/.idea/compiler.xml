@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="trap-consumer-service" />
+        <module name="authentication-service" />
+        <module name="trap-listener-service" />
+        <module name="model-stream-service" />
+        <module name="api-gateway" />
+        <module name="trap-stream-service" />
+        <module name="user-service" />
+        <module name="feedback-service" />
+        <module name="service-registry" />
+        <module name="structuring-service" />
+        <module name="web-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Api-gateway" target="1.5" />
+      <module name="api-gateway" target="17" />
+      <module name="authentication-service" target="17" />
+      <module name="feedback-service" target="17" />
+      <module name="model-stream-service" target="17" />
+      <module name="Processing" target="17" />
+      <module name="service-discovery" target="1.5" />
+      <module name="service-registry" target="17" />
+      <module name="structuring-service" target="17" />
+      <module name="Trap Stream" target="17" />
+      <module name="trap-consumer-service" target="17" />
+      <module name="trap-listener-service" target="17" />
+      <module name="trap-stream-service" target="17" />
+      <module name="TrapStream" target="17" />
+      <module name="user-management-service" target="17" />
+      <module name="user-service" target="17" />
+      <module name="web-service" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Api-gateway" options="" />
+      <module name="Processing" options="-parameters" />
+      <module name="Trap Stream" options="-parameters" />
+      <module name="TrapStream" options="-parameters" />
+      <module name="api-gateway" options="-parameters" />
+      <module name="authentication-service" options="-parameters" />
+      <module name="feedback-service" options="-parameters" />
+      <module name="model-stream-service" options="-parameters" />
+      <module name="service-discovery" options="" />
+      <module name="service-registry" options="-parameters" />
+      <module name="structuring-service" options="-parameters" />
+      <module name="trap-consumer-service" options="-parameters" />
+      <module name="trap-listener-service" options="-parameters" />
+      <module name="trap-stream-service" options="-parameters" />
+      <module name="user-management-service" options="-parameters" />
+      <module name="user-service" options="-parameters" />
+      <module name="web-service" options="-parameters" />
+    </option>
+  </component>
+</project>

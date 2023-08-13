@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/SNMP-trap-generator/pom.xml" />
+        <option value="$PROJECT_DIR$/SnmpReciever/pom.xml" />
+        <option value="$PROJECT_DIR$/kafkaConsumerSNMP/pom.xml" />
+        <option value="$PROJECT_DIR$/Processing/pom.xml" />
+        <option value="$PROJECT_DIR$/Web-Application/pom.xml" />
+        <option value="$PROJECT_DIR$/Api-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/service-discovery/pom.xml" />
+        <option value="$PROJECT_DIR$/User-management/pom.xml" />
+        <option value="$PROJECT_DIR$/service-registry/pom.xml" />
+        <option value="$PROJECT_DIR$/user-management/pom.xml" />
+        <option value="$PROJECT_DIR$/api-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/identity-service/pom.xml" />
+        <option value="$PROJECT_DIR$/user-service/pom.xml" />
+        <option value="$PROJECT_DIR$/Trap Stream/pom.xml" />
+        <option value="$PROJECT_DIR$/TrapStream/pom.xml" />
+        <option value="$PROJECT_DIR$/event-correlation-service/pom.xml" />
+        <option value="$PROJECT_DIR$/stream-service/pom.xml" />
+        <option value="$PROJECT_DIR$/structuring-service/pom.xml" />
+        <option value="$PROJECT_DIR$/authentication-service/pom.xml" />
+        <option value="$PROJECT_DIR$/feedback-service/pom.xml" />
+        <option value="$PROJECT_DIR$/trap-consumer-service/pom.xml" />
+        <option value="$PROJECT_DIR$/trap-listener-service/pom.xml" />
+        <option value="$PROJECT_DIR$/trap-stream-service/pom.xml" />
+        <option value="$PROJECT_DIR$/web-service/pom.xml" />
+        <option value="$PROJECT_DIR$/model-stream-service/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK" />
+</project>

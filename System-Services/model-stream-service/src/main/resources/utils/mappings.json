@@ -1,0 +1,116 @@
+{
+  "mappings": {
+    "properties": {
+      "@timestamp": {
+        "type": "date",
+        "format": "date_optional_time||epoch_second"
+      },
+      "timestamp": {
+        "type": "date",
+        "format": "date_optional_time||epoch_second"
+      },
+      "Device_uptime": {
+        "type": "wildcard"
+      },
+      "EX_Bits_received": {
+        "type": "wildcard"
+      },
+      "EX_Bits_sent": {
+        "type": "wildcard"
+      },
+      "EX_Inbound_packets_discarded": {
+        "type": "wildcard"
+      },
+      "EX_Inbound_packets_with_errors": {
+        "type": "wildcard"
+      },
+      "EX_Interface_type": {
+        "type": "wildcard"
+      },
+      "EX_Operational_status": {
+        "type": "wildcard"
+      },
+      "EX_Outbound_packets_discarded": {
+        "type": "wildcard"
+      },
+      "EX_Outbound_packets_with_errors": {
+        "type": "wildcard"
+      },
+      "EX_Speed": {
+        "type": "wildcard"
+      },
+      "ICMP_loss": {
+        "type": "wildcard"
+      },
+      "ICMP_ping": {
+        "type": "wildcard"
+      },
+      "ICMP_response_time": {
+        "type": "wildcard"
+      },
+      "IN_Bits_received": {
+        "type": "wildcard"
+      },
+      "IN_Bits_sent": {
+        "type": "wildcard"
+      },
+      "IN_Inbound_packets_discarded": {
+        "type": "wildcard"
+      },
+      "IN_Inbound_packets_with_errors": {
+        "type": "wildcard"
+      },
+      "IN_Interface_type": {
+        "type": "wildcard"
+      },
+      "IN_Operational_status": {
+        "type": "wildcard"
+      },
+      "IN_Outbound_packets_discarded": {
+        "type": "wildcard"
+      },
+      "IN_Outbound_packets_with_errors": {
+        "type": "wildcard"
+      },
+      "IN_Speed": {
+        "type": "wildcard"
+      },
+      "P_Bits_received": {
+        "type": "wildcard"
+      },
+      "P_Bits_sent": {
+        "type": "wildcard"
+      },
+      "P_Inbound_packets_discarded": {
+        "type": "wildcard"
+      },
+      "P_Inbound_packets_with_errors": {
+        "type": "wildcard"
+      },
+      "P_Interface_type": {
+        "type": "wildcard"
+      },
+      "P_Operational_status": {
+        "type": "wildcard"
+      },
+      "P_Outbound_packets_discarded": {
+        "type": "wildcard"
+      },
+      "P_Outbound_packets_with_errors": {
+        "type": "wildcard"
+      },
+      "P_Speed": {
+        "type": "wildcard"
+      },
+      "SNMP_availability": {
+        "type": "wildcard"
+      },
+      "class": {
+        "type": "wildcard"
+      },
+      "range": {
+        "type": "wildcard"
+      }
+    }
+  }
+}

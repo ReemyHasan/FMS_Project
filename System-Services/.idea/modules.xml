@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/api-gateway/api-gateway.iml" filepath="$PROJECT_DIR$/api-gateway/api-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/authentication-service/authentication-service.iml" filepath="$PROJECT_DIR$/authentication-service/authentication-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/feedback-service/feedback-service.iml" filepath="$PROJECT_DIR$/feedback-service/feedback-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/model-stream-service/model-stream-service.iml" filepath="$PROJECT_DIR$/model-stream-service/model-stream-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-registry/service-registry.iml" filepath="$PROJECT_DIR$/service-registry/service-registry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/structuring-service/structuring-service.iml" filepath="$PROJECT_DIR$/structuring-service/structuring-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/trap-consumer-service/trap-consumer-service.iml" filepath="$PROJECT_DIR$/trap-consumer-service/trap-consumer-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/trap-listener-service/trap-listener-service.iml" filepath="$PROJECT_DIR$/trap-listener-service/trap-listener-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/trap-stream-service/trap-stream-service.iml" filepath="$PROJECT_DIR$/trap-stream-service/trap-stream-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-service/user-service.iml" filepath="$PROJECT_DIR$/user-service/user-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-service/web-service.iml" filepath="$PROJECT_DIR$/web-service/web-service.iml" />
+    </modules>
+  </component>
+</project>
