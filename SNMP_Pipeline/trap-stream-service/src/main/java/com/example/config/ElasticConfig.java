@@ -1,0 +1,171 @@
+package com.example.configuration;
+
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch.cluster.PutComponentTemplateRequest;
+import co.elastic.clients.elasticsearch.core.BulkRequest;
+import co.elastic.clients.elasticsearch.core.BulkResponse;
+import co.elastic.clients.elasticsearch.ilm.IlmPolicy;
+import co.elastic.clients.elasticsearch.ilm.PutLifecycleRequest;
+import co.elastic.clients.elasticsearch.indices.*;
+import co.elastic.clients.json.jackson.JacksonJsonpMapper;
+import co.elastic.clients.transport.ElasticsearchTransport;
+import co.elastic.clients.transport.endpoints.BooleanResponse;
+import co.elastic.clients.transport.rest_client.RestClientTransport;
+import com.example.entities.ProcessedTrap;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import jakarta.annotation.PostConstruct;
+import lombok.Getter;
+import org.apache.http.HttpHost;
+import org.elasticsearch.client.RestClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+
+
+@Getter
+@Configuration
+public class elasticConfig {
+    @Autowired
+    private ResourceLoader resourceLoader;
+
+    @Value(("$elasticsearch.hostname"))
+    private String hostName;
+
+    @Value(("$elasticsearch.port"))
+    private int port;
+    private RestClient restClient = RestClient.builder(
+            new HttpHost(hostName, port)).build();
+
+    private  ElasticsearchTransport transport = new RestClientTransport(
+            restClient, new JacksonJsonpMapper());
+
+    private ElasticsearchClient elasticClient = new ElasticsearchClient(transport);
+    public void addPolicy(String path,String name) throws IOException {
+        Resource resource = resourceLoader.getResource("classpath:utils/"+path);
+        String filePath = resource.getFile().getAbsolutePath();
+        path = filePath;
+        FileReader r = null;
+        try {
+            r = new FileReader(path);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        IlmPolicy plc = new IlmPolicy.Builder().withJson(r).build();
+        PutLifecycleRequest policyReq = new PutLifecycleRequest.Builder().name(name).policy(plc).build();
+        try {
+            elasticClient.ilm().putLifecycle(policyReq);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addComponent(String path,String name) throws IOException {
+        Resource resource = resourceLoader.getResource("classpath:utils/"+path);
+        String filePath = resource.getFile().getAbsolutePath();
+        path = filePath;
+        FileReader r = null;
+        try {
+            r = new FileReader(path);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        IndexState indexState = new IndexState.Builder().withJson(r).build();
+        PutComponentTemplateRequest putComponentTemplateRequest = new PutComponentTemplateRequest
+                .Builder()
+                .name(name)
+                .template(indexState).build();
+        try {
+            elasticClient.cluster().putComponentTemplate(putComponentTemplateRequest);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void addIndexTemplate(String path,String name) throws IOException {
+        Resource resource = resourceLoader.getResource("classpath:utils/"+path);
+        String filePath = resource.getFile().getAbsolutePath();
+        path = filePath;
+        FileReader r = null;
+        try {
+            r = new FileReader(path);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+//        IndexTemplate indexTemplate = new IndexTemplate.Builder().withJson(r).build();
+//        IndexTemplateMapping indexTemplateMapping = new IndexTemplateMapping.Builder().withJson(r).build();
+        PutIndexTemplateRequest putIndexTemplateRequest = new PutIndexTemplateRequest
+                .Builder()
+                .withJson(r)
+                .name(name)
+                .build();
+        try {
+            elasticClient.indices().putIndexTemplate(putIndexTemplateRequest);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void addDataStream(String name){
+        CreateDataStreamRequest createDataStreamRequest = new CreateDataStreamRequest.Builder()
+                .name(name).build();
+        ExistsRequest existsRequest = new ExistsRequest.Builder().index(name).build();
+        try {
+            BooleanResponse b = elasticClient.indices().exists(existsRequest);
+            if (b.value() == false)
+                elasticClient.indices().createDataStream(createDataStreamRequest);
+        } catch (Exception e) {
+            return;
+//            throw new RuntimeException(e);
+        }
+    }
+    public void addIndex(String name){
+        CreateIndexRequest createIndexRequest = new CreateIndexRequest.Builder()
+                .index(name).build();
+        ExistsRequest existsRequest = new ExistsRequest.Builder().index(name).build();
+        try {
+            BooleanResponse b = elasticClient.indices().exists(existsRequest);
+            if (b.value() == false)
+                elasticClient.indices().create(createIndexRequest);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+//            throw new RuntimeException(e);
+        }
+    }
+    @PostConstruct
+    public void ElasticDataStreamConfig() throws JsonProcessingException, FileNotFoundException {
+        try {
+            addPolicy("policy.json", "traps-policy");
+            addComponent("settings.json", "traps-setting");
+            addComponent("mappings.json", "traps-mapping");
+            addIndexTemplate("index_template.json", "traps-template");
+            addDataStream("traps-data-stream");
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void addDoc(List<ProcessedTrap> jsons){
+        BulkRequest.Builder br = new BulkRequest.Builder();
+        for (ProcessedTrap s:jsons){
+            br.operations(op -> op
+                    .create(cr -> cr.index("traps-data-stream").document(s))
+            );
+        }
+        BulkResponse result = null;
+        System.out.println("Hey I am here");
+        try {
+            System.out.println("Hey I am here");
+            result = elasticClient.bulk(br.build());
+            System.out.println(result);
+        } catch (IOException e) {
+            System.out.println(e);
+            throw new RuntimeException(e);
+        }
+
+    }
+}
