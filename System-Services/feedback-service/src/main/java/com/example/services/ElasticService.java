@@ -8,8 +8,13 @@ import com.example.configs.EasticConfig;
 import com.example.dto.RangeRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 
@@ -18,9 +23,28 @@ import java.util.*;
 @Service
 public class ElasticService {
     @Autowired
+    private ResourceLoader resourceLoader;
+    @Autowired
     private EasticConfig elConf;
     String indexName = "knowledge-base";
     private List<JSONObject> bulk = new ArrayList<>();
+    public String addInitialData(){
+        Resource resource = resourceLoader.getResource("classpath:utils/"+"data_A1.csv");
+        try {
+            String filePath = resource.getFile().getAbsolutePath();
+            Reader reader = new FileReader(filePath);
+            CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader());
+            for (CSVRecord csvRecord : csvParser) {
+                JSONObject jsonObject = new JSONObject(csvRecord.toMap());
+                this.addToBulk(jsonObject);
+            }
+            return "Added Successfully";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Nothing Added";
+        }
+    }
+
     public void addDoc(JSONObject jsonObject){
         ObjectMapper objectMapper = new ObjectMapper();
         try {

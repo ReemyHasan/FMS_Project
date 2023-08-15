@@ -42,9 +42,7 @@ public class EasticConfig {
 
     public void addPolicy(String path,String name) throws IOException {
         Resource resource = resourceLoader.getResource("classpath:utils/"+path);
-        System.out.println(resource);
         String filePath = resource.getFile().getAbsolutePath();
-        System.out.println(filePath);
         path = filePath;
         FileReader r = null;
         try {
@@ -117,7 +115,7 @@ public class EasticConfig {
 //            throw new RuntimeException(e);
         }
     }
-    public void addIndex(String name){
+    public boolean addIndex(String name){
         CreateIndexRequest createIndexRequest = new CreateIndexRequest.Builder()
                 .index(name).build();
         ExistsRequest existsRequest = new ExistsRequest.Builder().index(name).build();
@@ -125,8 +123,10 @@ public class EasticConfig {
             BooleanResponse b = elasticClient.indices().exists(existsRequest);
             if (b.value() == false)
                 elasticClient.indices().create(createIndexRequest);
+            return b.value();
         } catch (Exception e) {
             e.printStackTrace();
+            return true;
         }
     }
     @PostConstruct
@@ -141,7 +141,7 @@ public class EasticConfig {
             addComponent("settings.json","knowledge-base-setting");
             addComponent("mappings.json","knowledge-base-mapping");
             addIndexTemplate("index_template.json","knowledge-base-template");
-            addIndex("knowledge-base");
+            boolean x = addIndex("knowledge-base");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -22,6 +22,9 @@ public class KafkaService {
         try {
             JSONObject jsonObject = new JSONObject(pduJson);
             String s = predictionService.getPrediction(pduJson);
+            if (s.charAt(0) != 'A' && s.charAt(0) != 'N' && s.charAt(0) != 'D'){
+                return;
+            }
             jsonObject.put("class",s);
             jsonObject.put("@timestamp",jsonObject.get("timestamp"));
             elasticService.addToBulk(jsonObject);

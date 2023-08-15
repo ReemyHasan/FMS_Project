@@ -25,5 +25,11 @@ public class HandleKnowledge {
         elasticService.deleteAll();
     }
 
+    @GetMapping("/initial")
+    public String addInitial(){
+        String s = elasticService.addInitialData();
+        return s;
+    }
+
 
 }

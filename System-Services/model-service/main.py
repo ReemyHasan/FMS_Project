@@ -67,7 +67,7 @@ def predictClass():
     data = request.json
     df = pd.DataFrame.from_dict(data,orient='index').T
     df = df.drop('timestamp',axis=1)
-    df.reindex(order)
+    df = df.reindex(order,axis="columns")
     response = model.predict(df)
     print(response)
     return response[0]
@@ -90,71 +90,78 @@ def calcMetrics(model,X_test,y_test):
     sensitivities = []
     g_means = []
     kappas = []
-    # Perform cross-validation
-
-    # Make predictions on the test set
+    accuracies = []
     y_pred = model.predict(X_test)
-
     # Calculate the metrics for each class
     f1_scores.append(f1_score(y_test, y_pred, average=None))
     sensitivities.append(recall_score(y_test, y_pred, average=None))
     g_means.append(
         np.sqrt(recall_score(y_test, y_pred, average=None) * recall_score(y_test, y_pred, average=None)).mean())
     kappas.append(cohen_kappa_score(y_test, y_pred))
-
+    accuracies.append(accuracy_score(y_test, y_pred))
     # Calculate the average metrics across all folds
     avg_f1_scores = np.mean(f1_scores, axis=0)
     avg_sensitivities = np.mean(sensitivities, axis=0)
     avg_g_mean = np.mean(g_means)
     avg_kappa = np.mean(kappas)
+    avg_accuracy = np.mean(accuracies)
     ret = ""
     # Print the metrics for each class
     for i, class_label in enumerate(model.classes_):
-        ret += f"Metrics for class {class_label}:\n"
+        ret += f"Metrics for class {class_label:}:" + ","
         print(f"Metrics for class {class_label}:")
-        ret += f"F1-Score: {avg_f1_scores[i]}\n"
-        print(f"F1-Score: {avg_f1_scores[i]}")
-        ret += f"Sensitivity: {avg_sensitivities[i]}"
-        ret += "\n"
+        ret += f"F1-Score: {avg_f1_scores[i]:.3f}" + ","
+        print(f"F1-Score: {avg_f1_scores[i]}:")
+        ret += f"Sensitivity: {avg_sensitivities[i]:.3f}"
+        ret += ","
         print(f"Sensitivity: {avg_sensitivities[i]}")
         print()
 
     # Print the average metrics
-    ret += f"Average G-Mean: {avg_g_mean}\n"
-    print(f"Average G-Mean: {avg_g_mean}")
-    ret += f"Average Kappa: {avg_kappa}\n"
-    print(f"Average Kappa: {avg_kappa}")
+    ret += f"G-Mean: {avg_g_mean:.3f}" + ","
+    print(f"G-Mean: {avg_g_mean}")
+    ret += f"Kappa: {avg_kappa:.3f}" + ","
+    print(f"Kappa: {avg_kappa}")
+    ret += f"Accuracy: {avg_accuracy:.3f}" + ","
+    print(f"Accuracy: {avg_accuracy}")
     labels = ["A","D","NE"]
     # Calculate confusion matrix
     cm = confusion_matrix(y_test, y_pred,labels=labels)
     # Get the number of classes
     num_classes = len(labels)
     # Create a string representation of the confusion matrix
-    cm_string = "Confusion Matrix:\n"
+    cm_string = "Confusion Matrix:,"
     for i in range(num_classes):
-        cm_string += f"Class {labels[i]}:\t"
+        cm_string += f"Class {labels[i]}:   "
         for j in range(num_classes):
-            cm_string += f"{cm[i, j]}\t"
-        cm_string += "\n"
+            cm_string += f"{cm[i, j]}   "
+        cm_string += ","
     # Print the confusion matrix
     print(cm_string)
-    ret += "\n" + cm_string + "\n"
+    ret += "," + cm_string + ","
     return ret
 
 @app.route("/model/metrics", methods=['GET'])
 @cross_origin()
 def returnMetrics():
-    index_name = "knowledge-base"
-    df2 = getAllfromIndex(index_name)
-    X = df2.drop('class', axis=1)
+    data = pd.read_csv('data_A1.csv')
+    X = data.drop('class', axis=1)
     X = X.drop('timestamp', axis=1)
-    print(X)
-    X = X.reindex(order,axis="columns")
-    print(X)
-    y = df2['class']
+    y = data['class']
     ret = calcMetrics(model,X,y)
     return ret
 
+@app.route("/model/accuracy", methods=['GET'])
+@cross_origin()
+def returnAcc():
+    data = pd.read_csv('data_A1.csv')
+    X = data.drop('class', axis=1)
+    X = X.drop('timestamp', axis=1)
+    y = data['class']
+    y_pred = model.predict(X)
+    accuracy = accuracy_score(y, y_pred)
+    rounded_value = (round(accuracy, 3))*100
+    return str(rounded_value)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=rest_port)
